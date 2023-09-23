@@ -1,44 +1,52 @@
-function Book(name, author, pages, status) {
-  this.name = name;
+const BOOKS = [];
+
+function Book(title, author, pages, status) {
+  this.title = title;
   this.author = author;
   this.pages = pages;
   this.status = status;
 }
 
-function Library() {
-  this.books = [];
-  this.addBook = function (book) {
-    this.books.push(book);
-  };
-  this.getBook = function (name) {
-    for (book of this.books) {
-      if ((book.name = name)) {
-        return book;
-      }
-    }
-  };
-}
-
 Book.prototype.getInfo = function () {
-  if (this.status === "reading") {
-    status = "currently reading";
-  } else {
-    status = this.status;
-  }
-  return `${this.name} by ${this.author}, ${this.pages}, ${status}`;
+  return `${this.title} by ${this.author}, ${this.pages}, ${status}`;
 };
 
-window.onload = () => {
-  myLibrary = new Library();
+function addBook(book) {
+  BOOKS.push(book);
+}
 
+function displayBooks() {
+  const bookGrid = document.querySelector(".book-grid");
+
+  for (let index = 0; index < BOOKS.length; index++) {
+    let book = BOOKS[index];
+    let element = `
+    <div class="book">
+      <p class="status">${book.status}</p>
+      <div class="img-box">
+        <img class="book-cover" src="cover.jpg" alt="book-img" />
+      </div>
+      <div class="text-box">
+        <p class="title">${book.title}</p>
+        <p class="author">${book.author}</p>
+     </div>
+   </div>`;
+
+    bookGrid.innerHTML += element;
+  }
+}
+
+window.onload = () => {
   // DUMMY BOOKS
   const witcher = new Book("The witcher", "Ryan", 255, "read");
   const mol = new Book("Mother of Learning", "Luis", 244, "read");
   const sherlock = new Book("Sherlock Holmes", "Ryan", 421, "not read");
   const tlm = new Book("The Legendary Mechanic", "Chocolion", 1231, "reading");
 
-  myLibrary.addBook(witcher);
-  myLibrary.addBook(mol);
-  myLibrary.addBook(sherlock);
-  myLibrary.addBook(tlm);
+  addBook(witcher);
+  addBook(mol);
+  addBook(sherlock);
+  addBook(tlm);
+
+  displayBooks();
 };
