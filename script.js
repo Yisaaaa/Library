@@ -1,5 +1,7 @@
+// This is where the books are stored
 const BOOKS = [];
 
+// Book object constructor
 function Book(title, author, pages, status) {
   this.title = title;
   this.author = author;
@@ -7,14 +9,17 @@ function Book(title, author, pages, status) {
   this.status = status;
 }
 
+// Returns the info of the book invoking this function
 Book.prototype.getInfo = function () {
   return `${this.title} by ${this.author}, ${this.pages}, ${status}`;
 };
 
+// Adds a book to the BOOKS array
 function addBook(book) {
   BOOKS.push(book);
 }
 
+// Displays the books in the BOOKS array
 function displayBooks() {
   const bookGrid = document.querySelector(".book-grid");
 
